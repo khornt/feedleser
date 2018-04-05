@@ -2,7 +2,8 @@ package com.horntvedt.camel.vgleser.config;
 
 public enum RouteEndepunkter {
 
-    VG_LESER_KONSUMENT("https://www.vg.no/rss/feed/?categories=&keywords=&limit=100&format=atom","Les atom feed fra VG");
+    VG_LESER_KONSUMENT("http://www.vg.no/rss/feed/?categories=&keywords=&limit=100&format=atom","Les atom feed fra VG"),
+    LESER("timer://mintimer?FixedRate=true&period=60000", "Feed Route");
 
 
     private final String uri;
