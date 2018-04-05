@@ -1,0 +1,281 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <groupId>com.horntvedt.camel</groupId>
+    <artifactId>vgleser</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>vgleser-application</name>
+    <description>project-description</description>
+    <packaging>jar</packaging>
+
+
+    <properties>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.scm.plugin.version>1.9.5</maven.scm.plugin.version>
+        <junit.version>4.12</junit.version>
+        <camel.version>2.19.1</camel.version>
+
+    </properties>
+
+    <!--  <scm>
+        <developerConnection>scm:git:https://git.aurora.skead.no/scm/tjint/kontakt-skatteetaten-rf1306.git
+        </developerConnection>
+      </scm> -->
+
+    <dependencies>
+
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-http</artifactId>
+            <version>${camel.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-cxf</artifactId>
+            <version>${camel.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.camel</groupId>
+                    <artifactId>camel-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-saxon</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-bam</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jetty</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-metrics</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring-boot-starter</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-ws-security</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jaxb</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring-boot</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+
+
+
+
+    </dependencies>
+
+
+    <build>
+        <defaultGoal>install</defaultGoal>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-scm-plugin</artifactId>
+                    <version>${maven.scm.plugin.version}</version>
+                    <configuration>
+                        <tag>v${project.version}</tag>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>appassembler-maven-plugin</artifactId>
+                    <version>1.10</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+
+                <!--<plugin>-->
+                <!--<groupId>org.sonatype.plugins</groupId>-->
+                <!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
+                <!--<version>1.6.3</version>-->
+                <!--<extensions>true</extensions>-->
+                <!--<configuration>-->
+                <!--<serverId>releases</serverId>-->
+                <!--<nexusUrl>http://aurora/nexus/</nexusUrl>-->
+                <!--<stagingProfileId>335fc6bbb2093</stagingProfileId>-->
+                <!--<autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+                <!--</configuration>-->
+                <!--</plugin>-->
+
+                <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
+                <!--<version>2.17</version>-->
+                <!--</plugin>-->
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <repositoryLayout>flat</repositoryLayout>
+                            <platforms>
+                                <platform>unix</platform>
+                            </platforms>
+                            <programs>
+                                <program>
+                                    <name>start</name>
+                                    <mainClass>com.horntvedt.camel.vgleserApp</mainClass>
+                                    <jvmSettings>
+                                        <extraArguments>
+                                            <extraArgument>
+                                                -javaagent:$JOLOKIA_PATH=host=0.0.0.0,port=8778,protocol=https
+                                            </extraArgument>
+                                        </extraArguments>
+                                    </jvmSettings>
+                                </program>
+                            </programs>
+                        </configuration>
+                        <id>pakkepakker-assembler</id>
+                        <goals>
+                            <goal>assemble</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>distro-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/pakkepakker_descriptor.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--<plugin>-->
+            <!--<groupId>org.jacoco</groupId>-->
+            <!--<artifactId>jacoco-maven-plugin</artifactId>-->
+            <!--<configuration>-->
+            <!--<destFile>${sonar.jacoco.reportPath}</destFile>-->
+            <!--<append>true</append>-->
+            <!--</configuration>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<goals>-->
+            <!--<goal>prepare-agent</goal>-->
+            <!--<goal>report</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+
+            <!--<plugin>-->
+            <!--<groupId>org.pitest</groupId>-->
+            <!--<artifactId>pitest-maven</artifactId>-->
+            <!--<configuration>-->
+            <!--<skip>true</skip>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
+
+
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
+            <!--<version>2.17</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<phase>validate</phase>-->
+            <!--<goals>-->
+            <!--<goal>check</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--<configuration>-->
+            <!--<configLocation>checkstyle/checkstyle-only-formatting.xml</configLocation>-->
+            <!--<consoleOutput>true</consoleOutput>-->
+            <!--</configuration>-->
+            <!--<dependencies>-->
+            <!--<dependency>-->
+            <!--<groupId>com.puppycrawl.tools</groupId>-->
+            <!--<artifactId>checkstyle</artifactId>-->
+            <!--<version>6.16.1</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+            <!--<groupId>ske.aurora.checkstyle</groupId>-->
+            <!--<artifactId>checkstyle-config</artifactId>-->
+            <!--<version>0.5</version>-->
+            <!--</dependency>-->
+            <!--</dependencies>-->
+
+            <!--</plugin>-->
+
+        </plugins>
+    </build>
+
+</project>
