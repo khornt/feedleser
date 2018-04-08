@@ -13,4 +13,5 @@ public class EtOgEtElement implements Processor  {
         String s = exchange.getContext().getTypeConverter().convertTo(String.class, node);
 
     }
+
 }

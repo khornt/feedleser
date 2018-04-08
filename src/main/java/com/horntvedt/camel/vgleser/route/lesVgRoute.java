@@ -8,8 +8,14 @@ import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
+
 @Component
 public class lesVgRoute extends RouteBuilder {
+
+
+    @Inject
+    VgLeserRespons vgLeserRespons;
 
     private static final String FEED_EN_OG_EN = "direct:FEED_EN_OG_EN";
     private static final String EN_OG_EN_ROUTE_ID = "route en og en";
@@ -23,12 +29,10 @@ public class lesVgRoute extends RouteBuilder {
             .stop();
 
 
-
-
         from(RouteEndepunkter.LESER.uri()).routeId(RouteEndepunkter.LESER.id())
 
                 .to(RouteEndepunkter.VG_LESER_KONSUMENT.uri())
-                .process(new VgLeserRespons())
+                .process(vgLeserRespons)
                 .split(body())
                 .to(FEED_EN_OG_EN);
 
