@@ -32,6 +32,12 @@ public class VgLeserRespons implements Processor {
         NodeList nl = doc.getElementsByTagName(ENTRY);
 
         List<vgNyhet> nyheter = byggListe(nl, guid);
+
+
+        if (nyheter.size() > 0) {
+            String str = "fdsfsdf";
+        }
+
         lagreNyheter(nyheter);
     }
 
@@ -39,6 +45,7 @@ public class VgLeserRespons implements Processor {
     private List<vgNyhet> byggListe(NodeList nl, String guid) {
 
         List<vgNyhet> nyheter = new ArrayList();
+
 
         for(int i = 0; i < 100; i++) {
 
@@ -52,7 +59,6 @@ public class VgLeserRespons implements Processor {
         }
 
         return nyheter;
-
     }
 
 

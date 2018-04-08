@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 
 @Component
@@ -22,7 +23,8 @@ public class EntryJDBC {
     private JdbcTemplate jdbcTemplate;
 
 
-    private String insertNyhet = "insert into nyheter(title, link, id, updated, summary) VALUES(?,?,?,?,?)";
+    private String insertNyhet = "insert into nyheter(title, link, id, updated, summary, lagttil, guid) " +
+                                    "VALUES(?,?,?,?,?,sysdate(),?)";
     private String updateNyhet = "update sistlest set guid = ? where id = 1";
 
 
@@ -31,7 +33,7 @@ public class EntryJDBC {
 
         try {
             i = jdbcTemplate.update(insertNyhet, new Object[]{nyhet.getTitle(), nyhet.getLink(), nyhet.getId(),
-                    nyhet.getUpdated(), nyhet.getSummary() });
+                    nyhet.getUpdated(), nyhet.getSummary(), UUID.randomUUID().toString() });
             return i;
         } catch (Exception e) {
             return -1;
