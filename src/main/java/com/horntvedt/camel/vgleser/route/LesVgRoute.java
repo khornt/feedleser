@@ -17,6 +17,9 @@ public class LesVgRoute extends RouteBuilder {
     @Inject
     VgLeserRespons vgLeserRespons;
 
+    @Inject
+    EtOgEtElement etOgEtElement;
+
     private static final String FEED_EN_OG_EN = "direct:FEED_EN_OG_EN";
     private static final String EN_OG_EN_ROUTE_ID = "route en og en";
 
@@ -32,14 +35,12 @@ public class LesVgRoute extends RouteBuilder {
         from(RouteEndepunkter.LESER.uri()).routeId(RouteEndepunkter.LESER.id())
 
                 .to(RouteEndepunkter.VG_LESER_KONSUMENT.uri())
-                .process(vgLeserRespons);
-//                .split(body())
-//                .to(FEED_EN_OG_EN);
-//
-//
-//
-//        from(FEED_EN_OG_EN).routeId(EN_OG_EN_ROUTE_ID)
-//                .process(new EtOgEtElement());
+                .process(vgLeserRespons)
+                .split(body())
+                .to(FEED_EN_OG_EN);
+
+        from(FEED_EN_OG_EN).routeId(EN_OG_EN_ROUTE_ID)
+                .process(etOgEtElement);
 
 
     }

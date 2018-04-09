@@ -1,9 +1,11 @@
 package com.horntvedt.camel.vgleser.processor;
 
 import com.horntvedt.camel.vgleser.database.EntryJDBC;
-import com.horntvedt.camel.vgleser.dto.vgNyhet;
+import com.horntvedt.camel.vgleser.dto.VgNyhet;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
@@ -17,6 +19,7 @@ import java.util.List;
 @Component
 public class VgLeserRespons implements Processor {
 
+    private static final Logger logger = LoggerFactory.getLogger(VgLeserRespons.class);
 
     @Autowired
     EntryJDBC entryJDBC;
@@ -31,20 +34,17 @@ public class VgLeserRespons implements Processor {
         String guid = entryJDBC.hentSistlesteFeedEntry();
         NodeList nl = doc.getElementsByTagName(ENTRY);
 
-        List<vgNyhet> nyheter = byggListe(nl, guid);
+        List<VgNyhet> nyheter = byggListe(nl, guid);
 
 
-        if (nyheter.size() > 0) {
-            String str = "fdsfsdf";
-        }
+        exchange.getIn().setBody(nyheter, List.class);
 
-        lagreNyheter(nyheter);
     }
 
 
-    private List<vgNyhet> byggListe(NodeList nl, String guid) {
+    private List<VgNyhet> byggListe(NodeList nl, String guid) {
 
-        List<vgNyhet> nyheter = new ArrayList();
+        List<VgNyhet> nyheter = new ArrayList();
 
 
         for(int i = 0; i < 100; i++) {
@@ -56,23 +56,21 @@ public class VgLeserRespons implements Processor {
                 break;
             }
             nyheter.add(byggNyhet(el));
+
+            if (i == 99) {
+                logger.warn("Lestinn fullt sett!: " + i+1 + " nyheter");
+            }
         }
+
+
 
         return nyheter;
     }
 
 
-    private void lagreNyheter(List<vgNyhet> nyheter) {
+    private VgNyhet byggNyhet(Element el) {
 
-        for(int i = nyheter.size()-1; i >  -1; i--) {
-            int  j = entryJDBC.leggInnNyhet(nyheter.get(i));
-            int  k = entryJDBC.updateNyhet(nyheter.get(i).getId());
-        }
-    }
-
-    private vgNyhet byggNyhet(Element el) {
-
-        vgNyhet nyhet = new vgNyhet();
+        VgNyhet nyhet = new VgNyhet();
         nyhet.setId(el.getElementsByTagName("id").item(0).getTextContent());
         nyhet.setTitle(el.getElementsByTagName("title").item(0).getTextContent());
         nyhet.setLink(el.getElementsByTagName("link").item(0).getTextContent());
@@ -83,4 +81,6 @@ public class VgLeserRespons implements Processor {
 
 
     }
+
+
 }

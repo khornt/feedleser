@@ -1,6 +1,6 @@
 package com.horntvedt.camel.vgleser.dto;
 
-public class vgNyhet {
+public class VgNyhet {
 
     private String id;
     private String title;
