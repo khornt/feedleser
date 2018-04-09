@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 
 @Component
-public class lesVgRoute extends RouteBuilder {
+public class LesVgRoute extends RouteBuilder {
 
 
     @Inject
@@ -32,14 +32,14 @@ public class lesVgRoute extends RouteBuilder {
         from(RouteEndepunkter.LESER.uri()).routeId(RouteEndepunkter.LESER.id())
 
                 .to(RouteEndepunkter.VG_LESER_KONSUMENT.uri())
-                .process(vgLeserRespons)
-                .split(body())
-                .to(FEED_EN_OG_EN);
-
-
-
-        from(FEED_EN_OG_EN).routeId(EN_OG_EN_ROUTE_ID)
-                .process(new EtOgEtElement());
+                .process(vgLeserRespons);
+//                .split(body())
+//                .to(FEED_EN_OG_EN);
+//
+//
+//
+//        from(FEED_EN_OG_EN).routeId(EN_OG_EN_ROUTE_ID)
+//                .process(new EtOgEtElement());
 
 
     }
