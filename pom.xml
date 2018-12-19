@@ -11,7 +11,7 @@
 
     <groupId>com.horntvedt.camel</groupId>
     <artifactId>vgleser</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.9-SNAPSHOT</version>
     <name>vgleser-application</name>
     <description>project-description</description>
     <packaging>jar</packaging>
@@ -24,23 +24,20 @@
         <maven.scm.plugin.version>1.9.5</maven.scm.plugin.version>
         <junit.version>4.12</junit.version>
         <camel.version>2.22.1</camel.version>
+        <awaitility.version>3.0.0</awaitility.version>
+        <flyway.version>5.1.1</flyway.version>
         <springframework-boot.version>1.5.3.RELEASE</springframework-boot.version>
         <system-rules.version>1.18.0</system-rules.version>
         <wiremock.version>2.5.1</wiremock.version>
         <junit.version>4.12</junit.version>
-
     </properties>
 
-
-
     <dependencies>
-
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <version>1</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.apache.camel</groupId>
@@ -71,7 +68,6 @@
             <artifactId>camel-spring-boot</artifactId>
             <version>${camel.version}</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -163,6 +159,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>${flyway.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-contract-wiremock</artifactId>
             <version>2.0.0.RELEASE</version>
@@ -179,6 +181,13 @@
             <groupId>com.github.tomakehurst</groupId>
             <artifactId>wiremock-standalone</artifactId>
             <version>2.18.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${awaitility.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -202,15 +211,12 @@
         </dependency>
     </dependencies>
 
-
     <build>
-
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
         </plugins>
     </build>
 </project>

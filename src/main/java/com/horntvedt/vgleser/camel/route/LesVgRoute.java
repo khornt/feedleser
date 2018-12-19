@@ -4,6 +4,7 @@ package com.horntvedt.vgleser.camel.route;
 import com.horntvedt.vgleser.config.RouteEndepunkter;
 import com.horntvedt.vgleser.camel.processor.EtOgEtElement;
 import com.horntvedt.vgleser.camel.processor.VgLeserRespons;
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +33,7 @@ public class LesVgRoute extends RouteBuilder {
 
 
         from(RouteEndepunkter.LESER.uri()).routeId(RouteEndepunkter.LESER.id())
-
+                .log(LoggingLevel.INFO, "leser fra VG")
                 .to(RouteEndepunkter.VG_LESER_KONSUMENT.uri())
                 .process(vgLeserRespons)
                 .split(body())

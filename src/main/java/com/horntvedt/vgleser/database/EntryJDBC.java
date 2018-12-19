@@ -22,7 +22,7 @@ public class EntryJDBC {
     private JdbcTemplate jdbcTemplate;
 
 
-    private static final String INNSERT_NYHET = "insert into nyheter(title, link, id, updated, summary, lagttil, guid) " +
+    private static final String INNSERT_NYHET = "insert into nyheter(tittel, link, id, oppdatert, summary, lagttil, guid) " +
                                     "VALUES(?,?,?,?,?,sysdate(),?)";
     private static final String UPDATE_NYHET = "update sistlest set guid = ? where id = 1";
 
@@ -38,6 +38,9 @@ public class EntryJDBC {
                     nyhet.getUpdated(), nyhet.getSummary(), UUID.randomUUID().toString() });
             return i;
         } catch (Exception e) {
+            logger.info("Insert feil!");
+            logger.info(e.getMessage());
+
             return -1;
         }
     }
@@ -50,6 +53,7 @@ public class EntryJDBC {
 
             i = jdbcTemplate.queryForObject(FINNES_FRA_FOER + s + "'", Integer.class);
         } catch (EmptyResultDataAccessException ex) {
+
             return -1;
         }
 
@@ -65,6 +69,9 @@ public class EntryJDBC {
             i = jdbcTemplate.update(UPDATE_NYHET, new Object[]{ id });
             return i;
         } catch (Exception e) {
+
+            logger.info("Oppdateringsfeil");
+            logger.info(e.getMessage());
             return -1;
         }
     }
@@ -74,12 +81,17 @@ public class EntryJDBC {
 
     public String hentSistlesteFeedEntry() {
         String entry = null;
+        logger.info("henter sist lest");
         try {
 
-            entry = jdbcTemplate.queryForObject("select guid from lekestue.sistlest where id = '1'", String.class);
+            entry = jdbcTemplate.queryForObject("select guid from sistlest where id = '1'", String.class);
         } catch (EmptyResultDataAccessException ex) {
             return "tomTom";
+        } catch (Exception ex) {
+            logger.info(ex.getMessage());
+            logger.info("blæ!");
         }
+
         return entry;
     }
 
