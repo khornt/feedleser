@@ -1,4 +1,4 @@
-package com.horntvedt.camel.vgleser;
+package com.horntvedt.vgleser;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.metrics.routepolicy.MetricsRoutePolicyFactory;
@@ -12,7 +12,6 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan({"com.horntvedt.*"})
 public class ApplicationConfig {
 
     @Inject
@@ -22,23 +21,11 @@ public class ApplicationConfig {
     DataSource dataSource;
 
 
-//    @Bean
-//    public ServletRegistrationBean soapDispatchServlet() {
-//        return new ServletRegistrationBean(new CXFServlet(), "/ws/*");
-//
-//    }
-
-
-
     @PostConstruct
     public void configureCamel() throws Exception {
 
         System.out.println("DATASOURCE = " + dataSource);
-
         camelContext.addRoutePolicyFactory(new MetricsRoutePolicyFactory());
 
     }
-
-
-
 }

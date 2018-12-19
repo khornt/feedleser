@@ -9,8 +9,6 @@
         <version>2.0.5.RELEASE</version>
     </parent>
 
-
-
     <groupId>com.horntvedt.camel</groupId>
     <artifactId>vgleser</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -27,6 +25,7 @@
         <junit.version>4.12</junit.version>
         <camel.version>2.22.1</camel.version>
         <springframework-boot.version>1.5.3.RELEASE</springframework-boot.version>
+        <system-rules.version>1.18.0</system-rules.version>
         <wiremock.version>2.5.1</wiremock.version>
         <junit.version>4.12</junit.version>
 
@@ -160,6 +159,26 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-test-spring</artifactId>
             <version>${camel.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-contract-wiremock</artifactId>
+            <version>2.0.0.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.stefanbirkner</groupId>
+            <artifactId>system-rules</artifactId>
+            <version>${system-rules.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock-standalone</artifactId>
+            <version>2.18.0</version>
             <scope>test</scope>
         </dependency>
 

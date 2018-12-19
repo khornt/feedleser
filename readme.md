@@ -1,11 +1,13 @@
-Bare en enkel test på å hente Atom feed fra VG.
+Bare en enkel test på å nyhetslinker fra en Atom feed hos VG.
 
 Planen er å bruke teknologier som:
 
+* SpringBoot
 * Apache Camel
 * Apache ActiveMQ
 * mysql
 * Atom feed
+* WireMock standalone
 * m.m.
 
 

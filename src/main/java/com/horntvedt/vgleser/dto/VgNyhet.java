@@ -1,4 +1,4 @@
-package com.horntvedt.camel.vgleser.dto;
+package com.horntvedt.vgleser.dto;
 
 public class VgNyhet {
 

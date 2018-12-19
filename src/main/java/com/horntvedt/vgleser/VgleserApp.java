@@ -1,4 +1,4 @@
-package com.horntvedt.camel.vgleser;
+package com.horntvedt.vgleser;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

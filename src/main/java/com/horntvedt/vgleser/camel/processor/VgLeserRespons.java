@@ -1,7 +1,7 @@
-package com.horntvedt.camel.vgleser.processor;
+package com.horntvedt.vgleser.camel.processor;
 
-import com.horntvedt.camel.vgleser.database.EntryJDBC;
-import com.horntvedt.camel.vgleser.dto.VgNyhet;
+import com.horntvedt.vgleser.database.EntryJDBC;
+import com.horntvedt.vgleser.dto.VgNyhet;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.slf4j.Logger;

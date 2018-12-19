@@ -1,15 +1,13 @@
-package com.horntvedt.camel.vgleser.processor;
+package com.horntvedt.vgleser.camel.processor;
 
-import com.horntvedt.camel.vgleser.database.EntryJDBC;
-import com.horntvedt.camel.vgleser.dto.VgNyhet;
+import com.horntvedt.vgleser.database.EntryJDBC;
+import com.horntvedt.vgleser.dto.VgNyhet;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class EtOgEtElement implements Processor  {
@@ -44,7 +42,4 @@ public class EtOgEtElement implements Processor  {
         int  k = entryJDBC.updateNyhet(nyhet.getId());
 
     }
-
-
-
 }

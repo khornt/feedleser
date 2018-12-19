@@ -1,4 +1,4 @@
-package com.horntvedt.camel.vgleser.config;
+package com.horntvedt.vgleser.config;
 
 public enum RouteEndepunkter {
 

@@ -1,0 +1,13 @@
+{
+  "request" : {
+    "url" : "/feedme",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "headers" : {
+      "Content-Type": "application/xml"
+    },
+    "bodyFileName" : "VG/nyheter.xml"
+    }
+  }

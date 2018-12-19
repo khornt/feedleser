@@ -1,7 +1,7 @@
-package com.horntvedt.camel.vgleser.database;
+package com.horntvedt.vgleser.database;
 
 
-import com.horntvedt.camel.vgleser.dto.VgNyhet;
+import com.horntvedt.vgleser.dto.VgNyhet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
