@@ -36,7 +36,6 @@ public class VgLeserRespons implements Processor {
 
         List<VgNyhet> nyheter = byggListe(nl, guid);
 
-
         exchange.getIn().setBody(nyheter, List.class);
 
     }
@@ -45,7 +44,6 @@ public class VgLeserRespons implements Processor {
     private List<VgNyhet> byggListe(NodeList nl, String guid) {
 
         List<VgNyhet> nyheter = new ArrayList();
-
 
         for(int i = 0; i < 100; i++) {
 
@@ -61,8 +59,6 @@ public class VgLeserRespons implements Processor {
                 logger.warn("Lestinn fullt sett!: " + i+1 + " nyheter");
             }
         }
-
-
 
         return nyheter;
     }

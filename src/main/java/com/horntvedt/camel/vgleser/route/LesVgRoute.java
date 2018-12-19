@@ -4,7 +4,6 @@ package com.horntvedt.camel.vgleser.route;
 import com.horntvedt.camel.vgleser.config.RouteEndepunkter;
 import com.horntvedt.camel.vgleser.processor.EtOgEtElement;
 import com.horntvedt.camel.vgleser.processor.VgLeserRespons;
-import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
